@@ -5,42 +5,84 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+    {#     plugin for slider#}
+{#    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">#}
+{#    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/solar/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="/static/css/square1.css"/>#}
+
 </head>
 <body>
 <style>
-    #logo{
+    #logo {
         float: right;
         padding: 30px;
     }
-    #header{
+
+    #header {
         background-color: #434243;
     }
-    .container form{
+
+    .container form {
         max-width: 100%;
         height: 100px;
         margin-left: 200px;
     }
-    .container .form-control{
+
+    .container .form-control {
         width: 450px;
     }
-    .container form button{
+
+    .container form button {
         width: 160px;
     }
+
+
+    {#[class*="slideshow"] {#}
+    {#    max-width: 600px;#}
+    {#    height: 450px;#}
+    {#    margin: 0 auto 40px;#}
+    {#    outline: none;#}
+
+
+
 </style>
 
 <div id="header" class="navbar sticky-top navbar-expand-lg navbar-dark bg-grey" data-spy="affix" data-offset-top="197">
+    <header>
+        Billing Management system
+    </header>
     <a href="userhome.html" class="navbar-nav ml-auto" id="logo">
-        <div  class="col">
-        <img src="/static/images/userw.png" style="margin-left: 100px; margin-bottom: 20px" height="50" alt="Logo"></div>
-        </a>
+        <div class="col">
+            <img src="/static/images/sign.jpg" style="margin-left: 100px; margin-bottom: 20px" height="50" alt="Logo">
+        </div>
+    </a>
 </div>
 
 <div class="container">
     <form class="form-inline">
-      <input class="form-control" type="search" placeholder="Search user" aria-label="Search">
-      <button class="btn btn-outline-info my-2" type="submit">Search</button>
+        <input class="form-control" type="search" placeholder="Search user" aria-label="Search">
+        <button class="btn btn-outline-info my-2" type="submit">Search</button>
     </form>
 
 </div>
+{##}
+{#<div class="container">#}
+{#    <h2>Slider</h2>#}
+{#    <div class="slideshow example-2">#}
+{#        <img src="/static/images/data.png">#}
+{#        <img src="/static/images/data.png">#}
+{#        <img src="/static/images/data.png">#}
+{#    </div>#}
+{##}
+{#</div>#}
+{##}
+{#<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>#}
+{#<script src="/static/js/square1.js"></script>#}
+{#<script>#}
+{#    $('.example-2').square1({animation: 'slide'});#}
+{#</script>#}
+
+
 </body>
 </html>
