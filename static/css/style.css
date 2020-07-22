@@ -1,0 +1,97 @@
+body {
+    background-color: #434243;
+}
+
+.info {
+    max-width: 30em;
+    color: white;
+    margin-left: 5em;
+    margin-top: 2em;
+
+}
+
+.info h1 {
+    font-size: 50px;
+    font-family: monospace;
+}
+
+.info button {
+    background-color: tomato;
+    color: white;
+    height: 50px;
+    width: 300px;
+    padding: 10px;
+    font-family: fantasy;
+    font-size: 20px;
+    border-radius: 8px;
+    border-width: 0px;
+}
+
+.info p {
+    font-family: sans-serif;
+    font-size: 20px;
+    color: whitesmoke;
+}
+
+ .test{
+    background-image: url("/static/images/test.png");
+
+}
+
+#background {
+    background-image: url("/static/images/882.jpg");
+    width: 800px;
+    background-size: cover;
+    height: 400px;
+    opacity: 0.6;
+    margin-left: 400px;
+    margin-top: 150px;
+    border-radius: 0%;
+
+}
+
+/*            #background:hover{
+                animation-name: scroll;
+                animation-duration: 4s;
+            }*/
+
+
+@keyframes scroll {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#overview {
+
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 1.8em;
+    top: 0px;
+}
+
+
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+
+/* css for login html*/
+
+
+#signinbox{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Addy user management </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script type="application/javascript" src="/static/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<style>
+
+#accountmodel{
+    margin-left: 1000px;
+    width:300px;
+}
+
+.container {
+    flex-direction: row;
+    display: inline-flex;
+    alignment: center;
+    margin-left: 100px;
+
+}
+
+
+
+.feature{
+    background-color:rgba(110, 106, 210, 0.91);
+    text-align: center;
+    font-size: 20px;
+    margin: 20px;
+    width: 280px;
+    height: 300px;
+    color: white;
+    font-family: 'Noto Sans TC', sans-serif;
+    transform: scale(1);
+    transition-duration: 1s;
+    margin-top: 50px;
+    border-radius: 20px;
+
+}
+
+.feature:hover {
+    transform: scale(1.1);
+    transition-duration: 1s;
+}
+.feature i{
+    font-size: 60px;
+    margin: 30px;
+}
+.feature p{
+    color: #8c9af8;
+}
+</style>
+<body>
+<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-grey" data-spy="affix" data-offset-top="197">
+    <a href="#" class="navbar-brand">
+        <img src="/static/images/data.png" height="70" alt="Logo">
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ml-auto mr-5">
+            <a href="#" class="nav-item nav-link ml-5 active">Home</a>
+            <a href="#" class="nav-item nav-link ml-5">Profile</a>
+            <button type="button" data-toggle="modal" data-target="#Pricingmodel"  class="btn btn-danger ml-5">Pricing</button>
+
+
+            {%  if not session.get('user') %}
+            <a href="" class="btn btn-success ml-5 disabled">Request Api</a>
+            {% else %}
+            <a href="" class="btn btn-success ml-5">Request Api</a>
+            {% endif %}
+
+
+           {%  if not session.get('user') %}
+            <a href="loginpage" class="btn btn-info ml-5">Login</a>
+            {% else %}
+           <button type="button" data-toggle="modal" data-target="#accountmodel"  class="btn btn-info ml-5">  {{ session.get('user') }} </button>
+           {% endif %}
+        </div>
+    </div>
+</nav>
+
+{# modal for user  info #}
+<!-- The Modal -->
+  <div class="modal fade" id="accountmodel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Account settings</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <a href="user/ {{ session.get('user') }}" class="btn btn-outline-primary btn-block"> Show my details</a></button>
+
+            <a href="signout" class="btn btn-outline-primary btn-block" > Logout</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{#data modal ends here#}
+
+
+{# model content #}
+
+
+<div class="modal fade" id="Pricingmodel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Pricing</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Free    $0 </h3>
+         <h5><small class="text-muted">No feature at all haha.</small></h5><br><Br><br>
+      <p class="card-text">You are limited and your hands are tied up. </p>
+
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="card-body">
+      <h3 class="card-title">Medium     $80</h3>
+        <h5><small class="text-muted">Sms and payment management</small></h5><Br><BR>
+      <p class="card-text">Includes bulk messaging system and payment management for clients</p>
+
+    </div>
+  </div>
+
+              <div class="card">
+
+    <div class="card-body">
+      <h3 class="card-title">High     $260</h3>
+        <h5><small class="text-muted">All services</small></h5><Br><BR><br>
+      <p class="card-text">Includes bulk messaging system and payment management for clients and other all</p>
+
+    </div>
+  </div>
+
+</div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{#model content ends here#}
+
+
+<div class="info">
+    <h1>Billing Management System</h1>
+    <p>Addy provides the simplest and easiest to use. Along the way to digitilatization just simply contact us and list
+        out your clients and manage their payments with ease..</p>
+    <button>USE ADDY WITH MINIMAL COST</button>
+</div>
+
+<div class="test" id="top" style="height: 650px; margin-left: 800px;  opacity: 0.5;">
+
+</div>
+
+
+<div style=" background-color: #383738; left: 0px;  width: auto;">
+
+    <div style=" margin-left:400px; text-align: center; width: 700px; padding: 20px; margin-top: 80px; font-family: sans-serif; color: white">
+        <h2>Overview</h2>
+        <p id="overview">
+            You can easily and quickly connect your apps, choose identity providers,
+            add users, set up rules, customize your login page and access analytics from your Addy dashboard.
+            It really is identity made simple for developers.
+        </p>
+    </div>
+
+
+    <div class="container">
+        <div class="feature">
+            <i class="fa fa-bar-chart"></i><br><br>
+            <h4>Check user data </h4><br>
+            <p><small>The admin can simply check user details</small></p>
+        </div>
+
+        <div class="feature">
+            <i class="fa fa-history"></i><br><br>
+            <h4>Payment History </h4><br>
+            <p><small>The admin can check the registered details of payment</small></p>
+        </div>
+
+        <div class="feature">
+            <i class="fa fa-wrench"></i><br><br>
+            <h4>User wised setting</h4><br>
+            <p><small>THe user settings can be integrated easily</small></p>
+        </div>
+
+        <div class="feature">
+            <i class="fa fa-search"></i><br><br>
+            <h4>Real time messaging</h4><br>
+            <p><small>The user can send bulk messages at single period of time</small></p>
+        </div>
+
+    </div>
+</div>
+
+<img style="margin-left: 500px;" src="/static/images/business-5258645__340.jpg">
+<br>
+<h2 style="margin-left: 500px">Uplift your Business strategy</h2>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".info").fadeIn("slow").animate({
+            'marginLeft': "+=5em"
+        }, 2000);
+
+        $("#top").delay("slow").fadeIn().animate({
+            'marginLeft': "-=200px"
+        }, 2000);
+
+    });
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

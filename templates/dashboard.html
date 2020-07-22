@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+<body>
+<style>
+    #logo{
+        float: right;
+        padding: 30px;
+    }
+    #header{
+        background-color: #434243;
+    }
+    .container form{
+        max-width: 100%;
+        height: 100px;
+        margin-left: 200px;
+    }
+    .container .form-control{
+        width: 450px;
+    }
+    .container form button{
+        width: 160px;
+    }
+</style>
+
+<div id="header" class="navbar sticky-top navbar-expand-lg navbar-dark bg-grey" data-spy="affix" data-offset-top="197">
+    <a href="userhome.html" class="navbar-nav ml-auto" id="logo">
+        <div  class="col">
+        <img src="/static/images/userw.png" style="margin-left: 100px; margin-bottom: 20px" height="50" alt="Logo"></div>
+        </a>
+</div>
+
+<div class="container">
+    <form class="form-inline">
+      <input class="form-control" type="search" placeholder="Search user" aria-label="Search">
+      <button class="btn btn-outline-info my-2" type="submit">Search</button>
+    </form>
+
+</div>
+</body>
+</html>
