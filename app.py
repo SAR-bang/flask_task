@@ -1,11 +1,9 @@
 import json
-
-from flask import Flask, render_template, flash, request, redirect, url_for, session
+from flask import Flask, Response, render_template, flash, request, redirect, url_for, session
 from flaskext.mysql import MySQL
-from pip._vendor.requests import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-
-# from werkzeug import generate_password_hash, check_password_hash
+from model import db, save_json
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 mysql = MySQL(app)
@@ -106,10 +104,50 @@ def logout():
     return redirect('/')
 
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
+@app.route('/addclient', methods=['post'])
+def addclients():
+    if request.method == "POST":
+        newClient = {
+            'Client Name': request.form['uname'],
+            'Client Address': request.form['uaddress'],
+            'Client Phone': request.form['uphone'],
+            'Client Due': request.form['udue']
+        }
 
+        db.append(newClient)
+        save_json()
+        return redirect(url_for('home_page'))
+    else:
+        return "error loading the file"
+
+
+@app.route('/about')
+def aboutpage():
+    return render_template('about.html')
+
+
+@app.route('/dashboard')
+def showimage():
+    # if str(save_generated_figure()):
+        return render_template('dashboard.html')
+
+
+def save_generated_figure():
+    try:
+        fig = plt.figure()
+        ax = fig.add_axes([0, 0, 1, 1])
+        ax.axis('equal')
+        tags = ['Number of Clients', 'Total Due']
+        Sum= 0
+        #
+        # Sum = sum(d[k,3] for d in db)
+
+        numbers = [len(db), sum]
+        ax.pie(numbers, labels=tags, autopct='%1.2f%%')
+        plt.savefig('static/images/Generated/pie.png')
+        return True
+    except Exception as e:
+        return e
 
 
 if __name__ == '__main__':

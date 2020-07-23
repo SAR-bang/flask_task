@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    {#         plugin for slider#}
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/solar/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/square1.css"/>
+
+</head>
+<body>
+<style>
+    body {
+        background-color: #7c7777;
+    }
+
+    #logo {
+        float: right;
+        padding: 30px;
+    }
+
+    #header {
+        background-color: #434243;
+        color: white;
+        font-family: Georgia;
+        height: 80px;
+        font-size: 40px;
+        text-shadow: 1px 1px white;
+    }
+
+    header {
+        margin-left: 400px;
+    }
+
+
+
+    [class*="slideshow"] {
+        max-width: 1000px;
+        height: 500px;
+        margin: 0 auto 40px;
+        outline: none;
+    }
+
+.lowcontainer {
+    width: 600px;
+    color: white;
+    font-family: SansSerif;
+    font-size: 40px;
+    margin: 200px;
+}
+
+</style>
+
+<div id="header" class="navbar sticky-top navbar-expand-lg navbar-dark bg-grey" data-spy="affix" data-offset-top="197">
+    <header>
+        About Billing Management system
+    </header>
+    <a href="dashboard.html" class="navbar-nav ml-auto" id="logo">
+        <div class="col">
+            <img src="/static/images/user.png" style="margin-left: 100px; margin-bottom: 20px" height="50" alt="Logo">
+        </div>
+    </a>
+</div>
+
+
+{##}
+<div class="container">
+    <div class="slideshow example-2">
+        <img src="/static/images/ss.jpg">
+        <img src="/static/images/ss.jpg">
+        <img src="/static/images/ss.jpg">
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/static/js/square1.js"></script>
+<script>
+    $('.example-2').square1({animation: 'slide'});
+</script>
+
+
+<h1 style="text-align: center; color: white; margin: 70px;">About us</h1>
+<iframe  style="margin-left: 300px" width="800" height="405" src="https://www.youtube.com/embed/M7Mlu2wJlNU">
+</iframe>
+
+
+<div class="container2">
+    <div class="lowcontainer">
+        <p style="float: left;">The <small>dashboard lets you </small> handle <small>the user and manage the user's services</small></p>
+           </div>
+    <img style="float: right; height: 350px; margin-right: 250px; border-radius: 5%" src="/static/images/call-center-3594408__340.jpg" width="600px">
+
+</div>
+
+
+<button class="btn btn-danger" type="submit"> GO To Dashboard</button>
+
+
+<div class="container2"  style="margin-top: 600px; padding:60px; text-align: center; background-color: #434243; color: white;">
+{#    <form class="form-inline">#}
+{#        <input class="form-control" type="search" placeholder="Search user" aria-label="Search">#}
+{#        <button class="btn btn-outline-info my-2" type="submit">Search</button>#}
+{#    </form>#}
+    <h5>! MakeitRight Copyrighted enjoy</h5>
+</div>
+
+</body>
+</html>
