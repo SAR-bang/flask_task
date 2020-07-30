@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate the bill via this Page</title>
+</head>
+<body>
+
+<form action="/generate">
+    <select name="user" class="form-control">
+        {% for user in users %}
+        <option name="value">{{ user.Client_Name }}</option>
+        {% endfor %}
+    </select>
+
+{#    <input type="text" readonly value="{% form['user'].Client_Due %}">#}
+    <input type="datetime-local" class="form-control">
+
+    <input type="number" class="form-control" placeholder="Paying Amount">
+</form>
+</body>
+</html>

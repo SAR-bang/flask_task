@@ -1,16 +1,18 @@
 import json
-from flask import Flask, Response, render_template, flash, request, redirect, url_for, session
+from flask import Flask, jsonify, render_template, flash, request, redirect, url_for, session, jsonify
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
-from model import db, save_json
+from model import db, save_json, db2, save_json2
 import matplotlib.pyplot as plt
+import requests
 
 app = Flask(__name__)
 mysql = MySQL(app)
-
 app.secret_key = 'your secret key'
 
-# Enter your database connection details below
+# Database connection details below
+#  USed the mysql dbms to handle the user authentication system
+
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
@@ -28,8 +30,12 @@ def login_page():
     return render_template('login.html')
 
 
+# Only accepts the method POST
+
 @app.route('/login', methods=['POST'])
 def login(cursor=None, conn=None):
+    # Accepting the data from the filled form
+
     _username = request.form['uemail']
     _password = request.form['upassword']
 
@@ -73,10 +79,16 @@ def signup():
             # connection is created now
             cursor = conn.cursor()
             # cursor is used for sql commands
-            cursor.execute(sql_q, data)
-            conn.commit()
-            flash("Successful login")
-            return render_template('login.html')
+
+            cursor.execute('SELECT * FROM clients WHERE username = %s ', (_name,))
+            if cursor.fetchall().__len__() == 0:
+                cursor.execute(sql_q, data)
+                conn.commit()
+                flash("Successful login")
+                return render_template('login.html')
+            else:
+                flash("User name already exists in the table")
+                return render_template('base.html')
         else:
             flash("User provided wrong credentials")
             return ('Error loading the data')
@@ -108,10 +120,11 @@ def logout():
 def addclients():
     if request.method == "POST":
         newClient = {
-            'Client Name': request.form['uname'],
-            'Client Address': request.form['uaddress'],
-            'Client Phone': request.form['uphone'],
-            'Client Due': request.form['udue']
+            'Client_Name': request.form['uname'],
+            'Client_Address': request.form['uaddress'],
+            'Client_Phone': request.form['uphone'],
+            'Client_Due': request.form['udue'],
+            'Client_Paid': request.form['upaid']
         }
 
         db.append(newClient)
@@ -121,15 +134,49 @@ def addclients():
         return "error loading the file"
 
 
-@app.route('/about')
+#  method to add the item in json
+@app.route('/dashboard/addItem/', methods=['post'])
+def addItem():
+    if request.method == "POST":
+        newItem = {
+            'Index': len(db2) + 1,
+            'Name': request.form['iname'],
+            'Rate': request.form['sprice'],
+            'Count': request.form['ucount'],
+        }
+
+        db2.append(newItem)
+        save_json2()
+        return redirect(url_for('showdashboard', itemcount=(len(db2) + 5) / 5))
+    else:
+        return "error loading the file"
+
+
+@app.route('/dashboard/about')
 def aboutpage():
     return render_template('about.html')
 
 
 @app.route('/dashboard')
-def showimage():
-    # if str(save_generated_figure()):
-        return render_template('dashboard.html')
+def showd():
+    return redirect(url_for('showdashboard', itemcount=1))
+
+
+@app.route('/dashboard/<int:itemcount>')
+def showdashboard(itemcount):
+    try:
+        sum = 0
+        paid = 0
+        for i in range(0, len(db)):
+            paid += int(db[i]['Client_Paid'])
+            sum += int(db[i]['Client_Due'])
+        begin = (itemcount - 1) * 5
+        _paginator_list = list(range(1, int(len(db2) / 5) + 2, 1))
+
+        return render_template('dashboard.html', length=len(db), due=sum, paid=paid, items=db2[begin:begin + 5],
+                               itemcount=itemcount, list=_paginator_list)
+    except Exception as e:
+        return str(e)
 
 
 def save_generated_figure():
@@ -137,17 +184,27 @@ def save_generated_figure():
         fig = plt.figure()
         ax = fig.add_axes([0, 0, 1, 1])
         ax.axis('equal')
-        tags = ['Number of Clients', 'Total Due']
-        Sum= 0
-        #
-        # Sum = sum(d[k,3] for d in db)
-
-        numbers = [len(db), sum]
-        ax.pie(numbers, labels=tags, autopct='%1.2f%%')
+        labels = ['clients', 'Jellybean', 'Milkshake', 'Cheesecake']
+        sizes = [len(db), 40.6, 20.7, 10.3]
+        colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+        patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
+        plt.legend(patches, labels, loc="best")
         plt.savefig('static/images/Generated/pie.png')
         return True
     except Exception as e:
-        return e
+        return False
+
+
+@app.route('/api/items')
+def api_all_card_route():
+    return jsonify(db2)
+
+
+@app.route('/generate_bill')
+def a_tag():
+    # methods to calculate about the corona virus details
+
+    return render_template('Bill.html', users=db)
 
 
 if __name__ == '__main__':

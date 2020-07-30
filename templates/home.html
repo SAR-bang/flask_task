@@ -16,6 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
+
 </head>
 
 <style>
@@ -186,7 +187,11 @@
     <h1>Billing Management System</h1>
     <p>Addy provides the simplest and easiest to use. Along the way to digitilatization just simply contact us and list
         out your clients and manage their payments with ease..</p>
-    <button>USE ADDY WITH MINIMAL COST</button>
+    {% if session.get('user') %}
+        <button><a style="text-decoration: none; color: white;" href="/dashboard">Go To Dashboard</a></button>
+    {% else %}
+        <button>USE ADDY WITH MINIMAL COST</button>
+    {% endif %}
 </div>
 
 <div class="test" id="top" style="height: 650px; margin-left: 800px;  opacity: 0.5;">

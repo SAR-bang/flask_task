@@ -5,100 +5,150 @@
     <title>Addy</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 
 </head>
+
 <body>
 <style>
-    #addform {
-        width: 600px;
-        margin-left: 300px;
-        margin-top: 30px;
+    html {
+        scroll-behavior: smooth;
+    }
+
+    #inputsearch {
+        margin-left: 40vw;
+    }
+
+    #sidenav {
+        top: 0vw;
+        bottom: 0vw;
+        height: 100vw;
+        position: fixed;
+        z-index: -1;
+        width: 16%;
+        margin: 0vw;
+        float: left;
+        cursor: pointer;
+    }
+
+    #sidenav h3 {
+        margin-top: 2vw;
+        margin-left: 1vw;
+    }
+
+    #active {
+        background-color: #7755ef;
+        color: white;
+        margin-top: 4vw;
+    }
+
+    div h6 i {
+        margin-left: 0.5vw;
+        margin-right: 0.8vw;
+    }
+
+    div h6 {
+        height: 2vw;
+        font-size: 1.2vw;
+        color: #131313;
+    }
+
+    div h6:hover {
+        background-color: #83adf3;
+    }
+
+    div h6 a {
+        text-decoration: none;
+        color: #131313;
+    }
+
+    .header {
+        margin-top: 15vw;
+        height: 5vw;
+        border-style: solid;
+        border-width: 0px 0px 1px 0px;
+        border-color: #7c7777;
+        box-shadow: #8b8a8a 0vw 0.2vw 0vw 0vw;
+        margin-bottom: 2vw;
+    }
+
+    .container .card-img-top {
+        background-color: #383738;
+        color: white;
+    }
+
+    #formAdd {
+        width: 50vw;
+        margin-left: 30vw;
         display: none;
         border-width: 1px;
         border-color: #434243;
         border-style: solid;
-    }
-
-    #inputsearch {
-        margin-left: 600px;
-    }
-
-    #sidenav {
-        top: 0px;
-        bottom: 0px;
-        height: 1200px;
         position: fixed;
-        z-index: -1;
+        background-color: #ffffff;
+        z-index: 1;
+        transition: ease-in-out;
     }
 
-    div h4:first-child {
-        margin-top: 80px;
-        color: chartreuse;
-    }
-
-    div h4 {
+    #imgShowData {
+        width: 25vw;
+        height: 12vw;
         color: white;
-        font-size: 25px;
-        margin-top: 20px;
-        margin-left: 10px;
+        background-image: url("/static/images/data.png");
+        background-position: top;
+        background-size: cover;
     }
 
-    .container .card-img-top {
-        background-color: #7c7777;
+    h1 {
+        margin-top: 1vw;
+        font-size: 2vw;
+    }
+
+    .href_class{
+        text-decoration: none;
         color: white;
     }
-
 </style>
 
-<nav class="navbar navbar-dark bg-dark">
-    <h2 style=" margin-left:20px; font-family: 'Rockwell Extra Bold'; color: white;">Make It Work ..*..AR</h2>
-
-
+<nav class="navbar navbar-dark bg-dark" style="width: 85%; float:right;">
+    <h4 style=" margin-left:20px; font-family: 'Rockwell Extra Bold'; color: white;">Make It Work ..*..AR</h4>
     <a class="form-inline">
         <input id="inputsearch" class="form-control" type="search" placeholder="Search"
                aria-label="Search">
-        <button onclick="show_input()" class="btn btn-info">
+        <button class="btn btn-info">
             <i class="fas fa-search"></i>
         </button>
 
         <a href="#" style="text-decoration: none; color: white; font-size: 30px;"> <i class="fas fa-bell"></i></a>
         <img style=" border-radius:50%;" src="/static/images/user_d.png" width="50px" height="40px"></a>
-    </form>
-
-
 </nav>
 </div>
 
 
 {# SideNav #}
-<div class="pos-f-t" id="sidenav" style="float: left; width: 100px;">
-    <div class="bg-dark p-4">
-        <h4><i class="fas fa-tachometer-alt"></i></h4>
-        <h6 style="color: chartreuse;">Home</h6>
-        <h4><i class="fas fa-users-cog"></i></h4>
-        <h6 class="text-white">Subscribe settings</h6>
-        <h4 onclick="show_form()"><i class="fas fa-user-plus"></i></h4>
-        <h6 onclick="show_form()" class="text-white">Register new </h6>
-        <h4><i class="fas fa-cogs"></i></h4>
-        <h6 class="text-white">Configure</h6>
-
+<div class="pos-f-t" id="sidenav">
+    <div>
+        <h3>Addy</h3>
+        <h6 id="active"><i class="fas fa-tachometer-alt"></i>Home</h6>
+        <h6><i class="fas fa-users-cog"></i>Subscribtion</h6>
+        <h6 onclick="show()" id="ShowBtn"><i class="fas fa-user-plus"></i>Register User</h6>
+        <h6><a class="href_class" href="about"><i class="fas fa-cogs"></i>Configure</a></h6>
+        <h6><a class="href_class" href="corona_virus"> know about Corona virus</a></h6>
     </div>
 </div>
 
 
-<form method="post" class="p-5" id="addform" action="addclient">
-    <div>
-        <h4 onclick="hide_form()"; style="cursor: pointer; color:#ff0202; float: right; margin-top: -63px; ">X</h4>
-    </div>
+<form method="post" class="p-5" id="formAdd" action="addclient">
 
-    <h2 style="text-align: center; Color: black; font-family: SansSerif;">Add New Client in Subscription List</h2>
+    <h2 onclick="hide_form()" style="color: red; float: right; cursor: pointer; margin-top: -50px;">&times;</h2>
+    <h2 style="text-align: center; Color: black; font-family: SansSerif;">Add New Client in Subscription
+        List</h2>
 
     <div class="form-group">
         <label for="uname"><i class="fas fa-user"></i> CLient Name</label>
-        <input class="form-control" type="text" placeholder="Enter the clients name" name="uname"><br>
+        <input class="form-control" type="text" required placeholder="Enter the clients name" name="uname"><br>
     </div>
 
     <div class="form-group">
@@ -112,8 +162,13 @@
     </div>
 
     <div class="form-group">
+        <label for="upaid"><i class="fas fa-wallet"></i> Client Paid Amount :</label>
+        <input type="number" class="form-control" name="upaid" required>
+    </div>
+
+    <div class="form-group">
         <label for="udue"><i class="fas fa-wallet"></i> Client Due Balance :</label>
-        <input type="number" class="form-control" name="udue">
+        <input type="number" class="form-control" name="udue" required>
     </div>
 
     <input type="submit" class=" form-control btn btn-outline-info" name="Add"></input>
@@ -121,9 +176,25 @@
 
 
 {#    Lets work upon the actual dashboard#}
-<div class="containerrht" style="float: right; width: 90%">
-    <h1 style="color: grey; font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif">
-        PAYMENTS</h1>
+<div class="containerrht" style="float: right; background-color: #434243; width: 85%">
+
+    {#    // main container#}
+
+    <div id="imgShowData" style="margin-left: 30vw;" class="row">
+        <h3 style="font-family: Verdana; font-size: 2vw; position:absolute; margin-top: 10vw; margin-left: 7.5vw;">
+            $987946<br><small> Total Earn</small></h3>
+
+        <a class="btn btn-danger" href="#additem"
+           style="text-decoration: none;color: white; height: 3vw; margin-left: 8vw; margin-top: 18vw;"> Add Item</a>
+    </div>
+
+
+    <div class="header">
+
+        <h1 style=" text-align:center; color: white; font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif">
+            PAYMENTS</h1>
+    </div>
+
     <div class="container">
         <div class="card-deck">
             <div class="card" style="background-color: #cf18fd;">
@@ -163,71 +234,165 @@
         </div>
 
     </div>
-    <br><br><br><br>
 
-    <div class="left-container" style="width: 50%; margin-top:100px; float: left;">
-        <div class="card-deck" style="width: 600px; text-align: center;">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">36</h5>
-                    <p class="card-text">Total Number of clients </p>
+    <div class="middle-container" style=" height: 30vw; background-color: #383738; margin: 6vw; padding-top: 3vw;">
+        <h4 style="color: white; margin-bottom: 5vw; text-align: center;">Data Of your client payments</h4>
+        <div class="left-container" style="width: 40%; margin-left: 3vw; float: left;">
+            <div class="card-deck" style="width: 35vw; text-align: center;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ length }}</h5>
+                        <p class="card-text">Total Number of clients </p>
+                    </div>
+                </div>
+                <div class="card" style="background-color: red;color: white;">
+                    <div class="card-body">
+                        <h5 class="card-title">$ {{ due }}</h5>
+                        <p class="card-text">Total Due </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            <div class="card-deck" style="width: 35vw; text-align: center;">
+                <div class="card" style="background-color: #8c9af8; color: white;">
+                    <div class="card-body">
+                        <h5 class="card-title">$ {{ paid }}</h5>
+                        <p class="card-text">Total Amount </p>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="background-color: red;color: white;">
-                <div class="card-body">
-                    <h5 class="card-title">27</h5>
-                    <p class="card-text">Total Transaction </p>
-                </div>
-            </div>
-
         </div>
 
-        <br>
-        <div class="card-deck" style="width: 600px; text-align: center;">
-            <div class="card" style="background-color: #8c9af8; color: white;">
-                <div class="card-body">
-                    <h5 class="card-title">$ 9871640</h5>
-                    <p class="card-text">Total Amount </p>
+        <div class="right-container"
+             style=" background-color: #211f1f; margin-bottom: 10vw; float: right; margin-right: 10vw; ">
+            <img src="/static/images/Generated/pie.png" height="200vw;">
+        </div>
+
+    </div>
+
+    <div style="margin-top: 10vw;">
+        <p style="margin-left:7vw; margin-bottom: 6vw; width: 40%; color: white; font-size: 2vw;">
+            Simply Add the item in your Database Lets you easily new item in your list do it easily.</p>
+
+        <div class="formdiv" id="additem"
+             style="background-color:#383738; width: 70%; color: white; margin-left: 15vw; padding: 3vw;">
+            <form method="post" action="addItem">
+                <h2 style=" margin:2vw; font-family: SansSerif;">Add New Item in Store <small><i
+                        class="fas fa-cart-plus"></i></small></h2>
+
+                <div class="row">
+                    <div class="col form-group">
+                        <label for="iname"> Item Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Item Name" name="iname">
+                    </div>
+
+                    <div class="col form-group">
+                        <label for="sprice"><i class="fas fa-wallet"></i> Rate :</label>
+                        <input type="number" class="form-control" name="sprice" placeholder="Enter rate of item"
+                               required>
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="ucount"><i class="fas fa-wallet"></i> Item Count :</label>
+                    <input type="number" class="form-control" placeholder="Enter the number of items" name="ucount"
+                           required>
+                </div>
+
+                <input type="submit" class="form-control btn btn-success" name="Add"></input>
+            </form>
         </div>
     </div>
 
-    <div class="right-container" style="width: 50%; height: 70%; overflow:hidden; float: right;">
-        <div class="card">
-            <div class="card-body mx-auto">
-                <h3 class="card-title" style="color: #0099ff;">Receivable amount</h3>
-                <h3 style=" color:cornflowerblue; position:absolute; margin-top: 180px; margin-left: 150px;">
-                    $9879465</h3>
-                <img src="/static/images/data.png" style="opacity: 0.7;" width="400px" height="400px">
-            </div>
-            <div class="card-footer"></div>
+
+    {#    Creating a div that shows the records retrieving from json file #}
+    {% if items %}
+        <div>
+            <h2 style="margin: 7vw; color: white; font-family: Georgia;">Item Listing : </h2>
+
+            <table class="table">
+                <thead>
+                <tr class="bg-dark" style="color: white;">
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Item Cost</th>
+                    <th scope="col">Item Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+
+                    <tr style="background-color: white;">
+                        <th scope="row">{{ item.Index }}</th>
+                        <td>{{ item.Name }}</td>
+                        <td>$ {{ item.Rate }}</td>
+                        <td>{{ item.Count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </div>
+
+        {# pagination #}
+        <nav aria-label="..." style="margin-top: 5vw;">
+            <ul class="pagination">
+                {% if itemcount==1 %}
+                    <li class="page-item disabled">
+                        <span class="page-link"><<</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="/dashboard/{{ itemcount-1 }}"><<</a>
+                    </li>
+                {% endif %}
+
+
+
+                {% for i in list[0:] %}
+                    {% if i == itemcount %}
+                        <li class="page-item active">
+
+                        <span class="page-link">
+                            {{ itemcount }}
+                            <span class="sr-only">(current)</span>
+                        </span>
+                        </li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="/dashboard/{{ i }}">{{ i }}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+
+
+                {% if itemcount==list|length %}
+                    <li class="page-item disabled">
+                        <span class="page-link">>></span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="/dashboard/{{ itemcount+1 }}"> >> </a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+    {% endif %}
 </div>
 
-<img src="/static/images/Generated/pie.png" alt="Error calculting the data">
 
-<script>
-    function show_form() {
-            document.getElementById('addform').style.display = "block";
-        }
-    function hide_form(){
-            document.getElementById('addform').style.display = "none"
-        }
-</script>
-<script>
-    function showinput() {
-        if (document.getElementById('inputsearch').style.display = "none") {
-            document.getElementById('inputsearch').style.display = "block";
-            window.scrollTo(0,0);
-
-        } else {
-            document.getElementById('inputsearch').style.display = "none"
-            window.scroll(0,0);
-        }
-
-    }
-</script>
 </body>
+
+<script>
+    function show() {
+        document.getElementById('formAdd').style.display = "block"
+    }
+
+    function hide_form() {
+        document.getElementById('formAdd').style.display = "none"
+    }
+
+</script>
 </html>
