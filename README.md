@@ -1,5 +1,8 @@
 # flask_task 
 
-After the completion of foundation course we are assigned to develop a webapp without any limitation and I have decided to build a webapp which can be further allowed to be integrated
+Used MYSql for user registration and used json parsing techniques to add clients and items in the system. Also can generate the bill during the payment process.
 
-among different frameworks till today ie. july 2020 I found this as easiest one 
+I tried using heroku but since Heroku Mysql requires the credit card I could not switch to postgre at last. 
+
+7 31 2020
+
