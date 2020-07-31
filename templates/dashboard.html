@@ -56,12 +56,9 @@
     }
 
     div h6:hover {
-        background-color: #83adf3;
-    }
-
-    div h6 a {
+        background-color: #434243;
         text-decoration: none;
-        color: #131313;
+        color: white;
     }
 
     .header {
@@ -106,10 +103,16 @@
         font-size: 2vw;
     }
 
-    .href_class{
+    .href_class a{
+        text-decoration: none;
+        color: black;
+    }
+
+    .href_class:hover{
         text-decoration: none;
         color: white;
     }
+
 </style>
 
 <nav class="navbar navbar-dark bg-dark" style="width: 85%; float:right;">
@@ -134,8 +137,8 @@
         <h6 id="active"><i class="fas fa-tachometer-alt"></i>Home</h6>
         <h6><i class="fas fa-users-cog"></i>Subscribtion</h6>
         <h6 onclick="show()" id="ShowBtn"><i class="fas fa-user-plus"></i>Register User</h6>
-        <h6><a class="href_class" href="about"><i class="fas fa-cogs"></i>Configure</a></h6>
-        <h6><a class="href_class" href="corona_virus"> know about Corona virus</a></h6>
+        <h6 class="href_class"><a class="href_a2" href="about"><i class="fas fa-cogs"></i>Configure</a></h6>
+        <h6 class="href_class"><a class="href_a2" > know about Corona virus</a></h6>
     </div>
 </div>
 
