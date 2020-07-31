@@ -44,18 +44,20 @@
         margin-top: 4vw;
     }
 
-    div h6 i {
+    #sidenav a i{
         margin-left: 0.5vw;
         margin-right: 0.8vw;
     }
 
-    div h6 {
+    .href_class {
+        width: available;
         height: 2vw;
         font-size: 1.2vw;
         color: #131313;
+        text-decoration: none;
     }
 
-    div h6:hover {
+    .href_class:hover {
         background-color: #434243;
         text-decoration: none;
         color: white;
@@ -103,15 +105,6 @@
         font-size: 2vw;
     }
 
-    .href_class a{
-        text-decoration: none;
-        color: black;
-    }
-
-    .href_class:hover{
-        text-decoration: none;
-        color: white;
-    }
 
 </style>
 
@@ -134,11 +127,11 @@
 <div class="pos-f-t" id="sidenav">
     <div>
         <h3>Addy</h3>
-        <h6 id="active"><i class="fas fa-tachometer-alt"></i>Home</h6>
-        <h6><i class="fas fa-users-cog"></i>Subscribtion</h6>
-        <h6 onclick="show()" id="ShowBtn"><i class="fas fa-user-plus"></i>Register User</h6>
-        <h6 class="href_class"><a class="href_a2" href="about"><i class="fas fa-cogs"></i>Configure</a></h6>
-        <h6 class="href_class"><a class="href_a2" > know about Corona virus</a></h6>
+        <a id="active"><i class="fas fa-tachometer-alt"></i>Home</a><br>
+        <a class="href_class" href="generate_bill"><i class="fas fa-users-cog"></i>Generate Bill</a><br>
+        <a class="href_class" onclick="show()" id="ShowBtn" href="#"><i class="fas fa-user-plus"></i>Register User</a><br>
+        <a class="href_class" href="about"><i class="fas fa-cogs"></i>Configure</a><br>
+        <a class="href_class" href="#"><i class="fas fa-cogs"></i>Corona</a><br>
     </div>
 </div>
 
@@ -383,6 +376,7 @@
         </nav>
 
     {% endif %}
+
 </div>
 
 

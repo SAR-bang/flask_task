@@ -3,20 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Generate the bill via this Page</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 </head>
+<style>
+
+</style>
 <body>
 
-<form action="/generate">
-    <select name="user" class="form-control">
-        {% for user in users %}
-        <option name="value">{{ user.Client_Name }}</option>
-        {% endfor %}
-    </select>
+{% if not value %}
+    <form action="get_details" method="post">
+        <select name="user" class="form-control">
+            {% for user in users %}
+                <option name="value">{{ user.Client_Name }}</option>
+            {% endfor %}
+        </select>
 
-{#    <input type="text" readonly value="{% form['user'].Client_Due %}">#}
-    <input type="datetime-local" class="form-control">
+        <input type="submit" name="Get Details">
+    </form>
+{% endif %}
+<div class="result">
+    {% if value  and not value1 %}
+        <h3>User {{ value.Client_Name }} </h3>
 
-    <input type="number" class="form-control" placeholder="Paying Amount">
-</form>
+        <h4>Remaining Due Balance: {{ value.Client_Due }}</h4>
+        <h5>Pay Bill for user</h5>
+
+        <form method="post" class="form-control" action="update">
+            <label for="uname">User Name: </label> <select name="uname" class="form-control" required>
+            <option>{{ value.Client_Name }}</option>
+        </select>
+            <label for="paying_amt">Amount paid: </label> <input type="number" name="paying_amt" class="form-control"
+                                                                 required>
+            <input type="date" class="form-control" name="Date" required>
+            <input type="submit" class="form-control bg-outline-info" name="Pay" value="Pay">
+        </form>
+
+    {% endif %}
+</div>
+
+{% if value1 %}
+    <div class="container" style="background-color: #434243; margin: 10vw; color: white;">
+        <h2 style=" text-align: center;"> Addy Billing System</h2>
+        <div class="row">
+            <div class="col-sm-6" style="float: right;">
+                <h3>Date {{ date }}</h3>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Mr/Mrs <u>{{ value1.Client_Name }}</u></h3>
+            </div>
+
+        </div>
+        <p>
+            You have Rs. {{ Rem }} Remaining. You have successfully paid Rs.{{ paid }} on {{ date }}
+        </p>
+
+        <p>Total Remaining: {{ Rem }}</p>
+        <p>Sign: A$%@#$ </p>
+    </div>
+    <a style="color: black; text-decoration: none; " href="/static/Bill/gene.xlsx"><i class="fas fa-arrow-alt-circle-down"></i>Download Bill</a>
+
+{% endif %}
 </body>
 </html>

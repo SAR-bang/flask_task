@@ -4,7 +4,13 @@ from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from model import db, save_json, db2, save_json2
 import matplotlib.pyplot as plt
+
+import pandas as pd
+import xlrd
+
 import requests
+
+
 
 app = Flask(__name__)
 mysql = MySQL(app)
@@ -116,7 +122,7 @@ def logout():
     return redirect('/')
 
 
-@app.route('/addclient', methods=['post'])
+@app.route('/dashboard/addclient', methods=['post'])
 def addclients():
     if request.method == "POST":
         newClient = {
@@ -200,11 +206,58 @@ def api_all_card_route():
     return jsonify(db2)
 
 
-@app.route('/generate_bill')
+@app.route('/dashboard/generate_bill')
 def a_tag():
     # methods to calculate about the corona virus details
 
     return render_template('Bill.html', users=db)
+
+
+@app.route('/dashboard/get_details' ,methods=['post'])
+def a_tag2():
+    # methods to calculate about the corona virus details
+    for i in db:
+        if  i['Client_Name']==request.form['user']:
+            value = i
+    return render_template('Bill.html', users=db, value=value)
+
+@app.route('/dashboard/update' ,methods=['post'])
+def update():
+    # updating the data
+    for i in db:
+        if  i['Client_Name']==request.form['uname'] and int(i['Client_Due']) >= int(request.form['paying_amt']):
+            i['Client_Due']= str(int(i['Client_Due']) - int(request.form['paying_amt']))
+            value=i
+            Rem =i['Client_Due']
+            save_json()
+
+            create_bill(name=i['Client_Name'],paid=request.form['paying_amt'],rem=i['Client_Due'])
+            nor=False
+            break
+
+        else:
+            nor=True
+
+    date = request.form['Date']
+
+    if(nor):
+        return "Supply valid message"
+    return render_template('Bill.html', users=db,value=value, value1=value, date =date, Rem= Rem, paid=request.form['paying_amt'])
+
+
+
+# method that handles the bill generation in csv format
+
+def create_bill(name,paid,rem):
+    bill_template = pd.DataFrame({'S.No.': 1, 'User Name': [name],
+                       'Paid Amount': [paid],
+                       'Remaining Balance': [rem]})
+
+    try:
+        bill_template.to_excel('static/Bill/gene.xlsx')
+    except Exception as e:
+        print(str(e))
+
 
 
 if __name__ == '__main__':

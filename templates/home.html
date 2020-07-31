@@ -188,7 +188,8 @@
     <p>Addy provides the simplest and easiest to use. Along the way to digitilatization just simply contact us and list
         out your clients and manage their payments with ease..</p>
     {% if session.get('user') %}
-        <button><a style="text-decoration: none; color: white;" href="/dashboard">Go To Dashboard</a></button>
+        <input style="  background-color: tomato; color: white;height: 50px; width: 300px; padding: 10px; font-family: fantasy;font-size: 20px; border-radius: 8px;border-width: 0px;"
+               id="submit" type="submit" value="Go To Dashboard" onclick="parent.location= '/dashboard'">
     {% else %}
         <button>USE ADDY WITH MINIMAL COST</button>
     {% endif %}
