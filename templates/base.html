@@ -13,18 +13,6 @@
     </head>
 
     <body style="background-color: #434243;">
-<!--         div to show error for user exists
--->
-{#        <c:if test="${messages.error!=null}">#}
-{#        <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
-{#            <strong>${messages.error}</strong>#}
-{#           <div>#}
-{#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                <span aria-hidden="true">&times;</span>#}
-{#            </button>#}
-{#        </div>#}
-{#        </c:if>#}
-
 
         <div class="register-form mt-3 mb-3">
             <div class="container">
@@ -63,18 +51,10 @@
 
                             </div>
 
-
-{#                            <!--check for session value-->#}
-{#                            <%#}
-{#                              String type = (String)session.getAttribute("type");#}
-{#                            %>#}
-
                             <div class="form-group">
                                 <label for="usertype"><i class="fas fa-users-crown"></i>User type</label>
                                 <select name = "uusertype" id="userttype"  class="form-control" required>
-{#                                    <c:if test="${type == 'Admin'}">#}
-{#                                        <option value="Admin">Admin</option>#}
-{#                                    </c:if>#}
+
                                     <option value ="Client">Client</option>
                                 </select>
                             </div>

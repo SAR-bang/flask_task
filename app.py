@@ -10,8 +10,6 @@ import xlrd
 
 import requests
 
-
-
 app = Flask(__name__)
 mysql = MySQL(app)
 app.secret_key = 'your secret key'
@@ -28,6 +26,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def home_page():
+    save_generated_figure()
     return render_template('home.html')
 
 
@@ -58,6 +57,8 @@ def login(cursor=None, conn=None):
             if (check_password_hash(milyo, _password)):
                 session['user'] = account[0][0]
                 return render_template('home.html')
+            else:
+                return render_template('login.html', error="Password error")
         else:
             error = "fill the correct credentials"
     else:
@@ -178,6 +179,7 @@ def showdashboard(itemcount):
             sum += int(db[i]['Client_Due'])
         begin = (itemcount - 1) * 5
         _paginator_list = list(range(1, int(len(db2) / 5) + 2, 1))
+        print(save_generated_figure())
 
         return render_template('dashboard.html', length=len(db), due=sum, paid=paid, items=db2[begin:begin + 5],
                                itemcount=itemcount, list=_paginator_list)
@@ -190,15 +192,19 @@ def save_generated_figure():
         fig = plt.figure()
         ax = fig.add_axes([0, 0, 1, 1])
         ax.axis('equal')
-        labels = ['clients', 'Jellybean', 'Milkshake', 'Cheesecake']
-        sizes = [len(db), 40.6, 20.7, 10.3]
+        labels=[]
+        sizes=[]
+        for i in db:
+                labels.append(i['Client_Name'])
+                sizes.append(i['Client_Due'])
+
         colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
         patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
         plt.legend(patches, labels, loc="best")
         plt.savefig('static/images/Generated/pie.png')
-        return True
+        return
     except Exception as e:
-        return False
+        return e
 
 
 @app.route('/api/items')
@@ -213,51 +219,51 @@ def a_tag():
     return render_template('Bill.html', users=db)
 
 
-@app.route('/dashboard/get_details' ,methods=['post'])
+@app.route('/dashboard/get_details', methods=['post'])
 def a_tag2():
     # methods to calculate about the corona virus details
     for i in db:
-        if  i['Client_Name']==request.form['user']:
+        if i['Client_Name'] == request.form['user']:
             value = i
     return render_template('Bill.html', users=db, value=value)
 
-@app.route('/dashboard/update' ,methods=['post'])
+
+@app.route('/dashboard/update', methods=['post'])
 def update():
     # updating the data
     for i in db:
-        if  i['Client_Name']==request.form['uname'] and int(i['Client_Due']) >= int(request.form['paying_amt']):
-            i['Client_Due']= str(int(i['Client_Due']) - int(request.form['paying_amt']))
-            value=i
-            Rem =i['Client_Due']
+        if i['Client_Name'] == request.form['uname'] and int(i['Client_Due']) >= int(request.form['paying_amt']):
+            i['Client_Due'] = str(int(i['Client_Due']) - int(request.form['paying_amt']))
+            value = i
+            Rem = i['Client_Due']
             save_json()
 
-            create_bill(name=i['Client_Name'],paid=request.form['paying_amt'],rem=i['Client_Due'])
-            nor=False
+            create_bill(name=i['Client_Name'], paid=request.form['paying_amt'], rem=i['Client_Due'])
+            nor = False
             break
 
         else:
-            nor=True
+            nor = True
 
     date = request.form['Date']
 
-    if(nor):
+    if (nor):
         return "Supply valid message"
-    return render_template('Bill.html', users=db,value=value, value1=value, date =date, Rem= Rem, paid=request.form['paying_amt'])
-
+    return render_template('Bill.html', users=db, value=value, value1=value, date=date, Rem=Rem,
+                           paid=request.form['paying_amt'])
 
 
 # method that handles the bill generation in csv format
 
-def create_bill(name,paid,rem):
+def create_bill(name, paid, rem):
     bill_template = pd.DataFrame({'S.No.': 1, 'User Name': [name],
-                       'Paid Amount': [paid],
-                       'Remaining Balance': [rem]})
+                                  'Paid Amount': [paid],
+                                  'Remaining Balance': [rem]})
 
     try:
         bill_template.to_excel('static/Bill/gene.xlsx')
     except Exception as e:
         print(str(e))
-
 
 
 if __name__ == '__main__':
